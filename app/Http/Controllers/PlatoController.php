@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Plato;
 
-class RecetaController extends Controller
+class PlatoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +14,8 @@ class RecetaController extends Controller
      */
     public function index()
     {
-        //
+        $platos = Plato::all();
+        return view('plato.index')->with('platos',$platos);
     }
 
     /**
@@ -23,7 +25,7 @@ class RecetaController extends Controller
      */
     public function create()
     {
-        //
+        return view('plato.create');
     }
 
     /**
@@ -34,7 +36,16 @@ class RecetaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $platos = new Plato();
+        $platos->nombre = $request->get('nombre');
+        $platos->tipo_plato = $request->get('tipo');
+        $platos->categoria_plato = $request->get('categoria');
+        $platos->precio = $request->get('precio');
+        $platos->vegetariano = $request->get('vegetariano');
+        $platos->imagen = $request->get('imagen');
+        $platos->save();
+
+        return redirect()->route('platos.index');
     }
 
     /**
@@ -56,7 +67,8 @@ class RecetaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $plato = Plato::find($id);
+         return view('plato.edit')->with('plato',$plato);
     }
 
     /**
@@ -68,7 +80,16 @@ class RecetaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $plato = Plato::find($id);
+        $plato->nombre = $request->get('nombre');
+        $plato->tipo_plato = $request->get('tipo');
+        $plato->categoria_plato = $request->get('categoria');
+        $plato->precio = $request->get('precio');
+        $plato->vegetariano = $request->get('vegetariano');
+        $plato->imagen = $request->get('imagen');
+        $plato->save();
+
+        return redirect()->route('platos.index');
     }
 
     /**
@@ -79,6 +100,9 @@ class RecetaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $plato = Plato::find($id);        
+        $plato->delete();
+
+        return redirect()->route('platos.index');
     }
 }

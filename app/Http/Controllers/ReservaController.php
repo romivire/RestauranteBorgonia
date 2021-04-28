@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Reserva;
 
 class ReservaController extends Controller
+ 
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +15,8 @@ class ReservaController extends Controller
      */
     public function index()
     {
-        //
+        $reservas = Reserva::all();
+        return view('reserva.index')->with('reservas',$reservas);
     }
 
     /**
@@ -23,7 +26,7 @@ class ReservaController extends Controller
      */
     public function create()
     {
-        //
+        return view('reserva.create');
     }
 
     /**
@@ -34,7 +37,14 @@ class ReservaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $reserva = new Reserva();
+        $reserva->fecha = $request->get('fecha');
+        $reserva->hora = $request->get('hora');
+        $reserva->cantidad_personas = $request->get('cantidad_personas');
+        $reserva->observacion = $request->get('observacion');
+        $reserva->save();
+
+        return redirect()->route('reservas.index');
     }
 
     /**
@@ -56,7 +66,8 @@ class ReservaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $reserva = Reserva::find($id);
+        return view('reserva.edit')->with('reserva',$reserva);
     }
 
     /**
@@ -68,7 +79,14 @@ class ReservaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $reserva = Reserva::find($id);
+        $reserva->fecha = $request->get('fecha');
+        $reserva->hora = $request->get('hora');
+        $reserva->cantidad_personas = $request->get('cantidad_personas');
+        $reserva->observacion = $request->get('observacion');
+        $reserva->save();
+
+        return redirect()->route('reservas.index');
     }
 
     /**
@@ -79,6 +97,9 @@ class ReservaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $reserva = Reserva::find($id);        
+        $reserva->delete();
+
+        return redirect()->route('reservas.index');
     }
 }
