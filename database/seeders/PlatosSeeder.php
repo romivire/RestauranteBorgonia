@@ -22,5 +22,21 @@ class PlatosSeeder extends Seeder
             'vegetariano' => 1,
             'imagen' => 'imagen a completar'
         ]);
+        DB::table('platos')->insert([
+            'nombre' => 'Bife de lomo a la portuguesa',
+            'tipo_plato' => 'carne',
+            'precio' => 50,
+            'categoria_plato' => 'principal',
+            'vegetariano' => 0,
+            'imagen' => 'imagen a completar'
+        ]);
+        DB::table('platos')->insert([
+            'nombre' => 'Panqueques con dulce de leche',
+            'tipo_plato' => 'postre',
+            'precio' => 50,
+            'categoria_plato' => 'postre',
+            'vegetariano' => 0,
+            'imagen' => 'imagen a completar'
+        ]);
     }
 }
