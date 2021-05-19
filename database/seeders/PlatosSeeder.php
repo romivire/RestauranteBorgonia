@@ -16,27 +16,24 @@ class PlatosSeeder extends Seeder
     {
         DB::table('platos')->insert([
             'nombre' => 'Ensalada rusa',
-            'tipo_plato' => 'ensalada',
             'precio' => 3,
-            'categoria_plato' => 'entrada',
-            'vegetariano' => 1,
-            'imagen' => 'imagen a completar'
+            'categoria_plato' => 'Ensalada',
+            'vegetariano' => 'Si'
+            
         ]);
         DB::table('platos')->insert([
             'nombre' => 'Bife de lomo a la portuguesa',
-            'tipo_plato' => 'carne',
             'precio' => 50,
-            'categoria_plato' => 'principal',
-            'vegetariano' => 0,
-            'imagen' => 'imagen a completar'
+            'categoria_plato' => 'Carne',
+            'vegetariano' => 'No'
+            
         ]);
         DB::table('platos')->insert([
             'nombre' => 'Panqueques con dulce de leche',
-            'tipo_plato' => 'postre',
             'precio' => 50,
-            'categoria_plato' => 'postre',
-            'vegetariano' => 0,
-            'imagen' => 'imagen a completar'
+            'categoria_plato' => 'Postre',
+            'vegetariano' => 'No'
+            
         ]);
     }
 }
