@@ -18,7 +18,7 @@ class CreateReservasTable extends Migration
             $table->date('fecha');
             $table->time('hora');
             $table->integer('cantidad_personas');
-            $table->string('observacion',255)->nullable();
+            $table->string('observacion',150)->nullable();
             $table->timestamps();
         });
     }
