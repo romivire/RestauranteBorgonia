@@ -1,10 +1,9 @@
-@extends('layouts.plantillabase')
+@extends('layouts.app')
 
 @section('contenido')
-<!-- <div class="shadow-lg p-3 mb-5 bg-white rounded"><h3>Contenido de INDEX</h3></div> -->
-<h1>Datos del Restaurante</h1>
+<h2 style="color:black;" class="h2-custom">DATOS DEL RESTAURANTE</h2>
 
-<table class="table table-dark table-striped mt-4">
+<table class="table table-dark table-striped mt-4 cover-container">
   <thead>
     <tr>
       <th scope="col">ID</th>
@@ -19,13 +18,11 @@
         <td>{{$restaurante->id}}</td>
         <td>{{$restaurante->nombre}}</td>
         <td>{{$restaurante->ubicacion}}</td>
-        <td>{{$restaurante->capacidad}}</td>
-        <td>
-            <a href="/restaurantes/{{$restaurante->id}}/edit" class="btn btn-info">Editar</a>         
-        </td>        
+        <td>{{$restaurante->capacidad}}</td>       
     </tr>
     @endforeach
-  </tbody>
+    <div>    
+  </tbody>       
 </table>
-
-@endsection
+</div>
+@endsection 
