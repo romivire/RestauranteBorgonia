@@ -1,29 +1,32 @@
-@extends('layouts.plantillabase')
+@extends('layouts.app')
 
 @section('contenido')
-<!-- <div class="shadow-lg p-3 mb-5 bg-white rounded"><h3>Contenido de INDEX</h3></div> -->
-<h1>Reservas</h1>
-<a href="{{route('reservas.create')}}" class="btn btn-primary">CREAR</a>
+<h2 style="color:black;" class="h2-custom">RESERVAS</h2>
+<a href="{{ route('reservas.create') }}" class="btn btn-info">CREAR NUEVA RESERVA</a>
 
-
-<table class="table table-dark table-striped mt-4">
+<table class="table table-dark table-striped mt-4 cover-container" style="table-layout: fixed;">
   <thead>
     <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Fecha</th>
-      <th scope="col">Hora</th>
-      <th scope="col">Cantidad de personas</th>
+      <th scope="col" style="width:10%">ID</th>
+      <th scope="col" style="width:10%">Fecha</th>
+      <th scope="col" style="width:10%">Hora</th>
+      <th scope="col" style="width:15%">Cantidad de personas</th>
       <th scope="col">Observacion</th>
+      <th scope="col" style="width:15%"></th>
     </tr>
   </thead>
   <tbody>    
     @foreach ($reservas as $reserva)
-    <tr>
+    <?php 
+        $hora=date('H:i',strtotime($reserva->hora));
+        $fecha=date('d/m/y',strtotime($reserva->fecha));
+    ?>
+    <tr style="height: 100%;">
         <td>{{$reserva->id}}</td>
-        <td>{{$reserva->fecha}}</td>
-        <td>{{$reserva->hora}}</td>
+        <td>{{$fecha}}</td>
+        <td>{{$hora}}</td>
         <td>{{$reserva->cantidad_personas}}</td>
-        <td>{{$reserva->observacion}}</td>
+        <td style="width: 100px; overflow: hidden;">{{$reserva->observacion}}</td>
         <td>
          <form action="{{ route('reservas.destroy',$reserva->id) }}" method="POST">
             <a href="/reservas/{{$reserva->id}}/edit" class="btn btn-info">Editar</a>         
