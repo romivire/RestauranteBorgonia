@@ -1,44 +1,53 @@
-@extends('layouts.plantillabase')
+@extends('layouts.app')
 
 @section('contenido')
-<!-- <div class="shadow-lg p-3 mb-5 bg-white rounded"><h3>Contenido de INDEX</h3></div> -->
-<h1>Platos</h1>
-<a href="{{route('platos.create')}}" class="btn btn-primary">CREAR</a>
 
+<h2 style="color:black;" class="h2-custom">NUESTRA CARTA</h2>
+<div class="album py-5 px-5 bg-custom">
+    <div class="container-xl">
 
-<table class="table table-dark table-striped mt-4">
-  <thead>
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Nombre</th>
-      <th scope="col">Tipo de plato</th>
-      <th scope="col">Precio</th>
-      <th scope="col">Categoria de Plato</th>
-      <th scope="col">Vegetariano</th>
-      <th scope="col">Imagen</th>
-    </tr>
-  </thead>
-  <tbody>    
-    @foreach ($platos as $plato)
-    <tr>
-        <td>{{$plato->id}}</td>
-        <td>{{$plato->nombre}}</td>
-        <td>{{$plato->tipo_plato}}</td>
-        <td>{{$plato->precio}}</td>
-        <td>{{$plato->categoria_plato}}</td>
-        <td>{{$plato->vegetariano}}</td>
-        <td>{{$plato->imagen}}</td>
-        <td>
-         <form action="{{ route('platos.destroy',$plato->id) }}" method="POST">
-            <a href="/platos/{{$plato->id}}/edit" class="btn btn-info">Editar</a>         
-                @csrf
-                @method('DELETE')
-            <button type="submit" class="btn btn-danger">Delete</button>
-         </form>          
-        </td>        
-    </tr>
-    @endforeach
-  </tbody>
-</table>
+      <div class="row row-cols-md-4 g-4">
+        @foreach ($platos as $plato)
+          <div class="col-md-4" style="heigth:100%">
+            <div class="card shadow-sm h-100">
+              
+              @if ($imagen=$plato->imagen)
+              <?php 
+                $bytea=stream_get_contents($imagen);
+                $string=pg_unescape_bytea($bytea);
+              ?>
+
+              <img class="card-img-top" src="img/{{$string}}" width="250" height="225" style="object-fit:contain"></img>
+              @else
+              <img class="card-img-top" src="img/null.jpg" width="250" height="225" style="object-fit:contain"></img>
+              @endif
+              <div class="card-body d-flex flex-column">
+                <div class="card-title" style="color:black; font-size:1.5em; height:50%; font-weight: bold">{{$plato->nombre}}</div>
+                <div class="card-text" style="color:black; text-align: left">Categoria del plato: {{$plato->categoria_plato}}</div>
+                <div class="card-text" style="color:black; text-align: left">Vegetariano: {{$plato->vegetariano}}</div>
+                
+
+              </div>
+              <div class="card-footer">
+                  <div class="d-flex justify-content-between align-items-center">
+                  @hasanyrole('editor|admin')
+                    <div class="btn-group">
+                    <form action="{{ route('platos.destroy',$plato->id) }}" method="POST">
+                        <a href="/platos/{{$plato->id}}/edit" class="btn btn-info">Editar</a>
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                      </form> 
+                    </div>
+                  @endhasanyrole
+                  <strong class="text-body" style="font-size:1.5em">${{$plato->precio}}</strong>
+                  </div>
+                </div>
+            </div>
+          </div>
+        @endforeach
+      </div>
+    </div>
+  </div>
 
 @endsection
