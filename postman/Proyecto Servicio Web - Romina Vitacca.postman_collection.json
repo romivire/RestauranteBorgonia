@@ -15,22 +15,23 @@
 					"formdata": [
 						{
 							"key": "fecha",
-							"value": "2021-05-12",
+							"value": "2021-05-20",
+							"contentType": "",
 							"type": "text"
 						},
 						{
 							"key": "hora",
-							"value": "20:30:00",
+							"value": "21:30:00",
 							"type": "text"
 						},
 						{
 							"key": "cantidad personas",
-							"value": "7",
+							"value": "4",
 							"type": "text"
 						},
 						{
 							"key": "observacion",
-							"value": "es una prueba",
+							"value": "Esto es una observacion",
 							"type": "text"
 						}
 					]
@@ -59,7 +60,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://proyecto-heroku-iaw-romivire.herokuapp.com/api/reservas/1/edit",
+					"raw": "http://proyecto-heroku-iaw-romivire.herokuapp.com/api/reservas/1",
 					"protocol": "http",
 					"host": [
 						"proyecto-heroku-iaw-romivire",
@@ -69,8 +70,7 @@
 					"path": [
 						"api",
 						"reservas",
-						"1",
-						"edit"
+						"1"
 					]
 				},
 				"description": "Obtiene una reserva"
