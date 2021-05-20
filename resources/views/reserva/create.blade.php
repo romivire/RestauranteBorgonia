@@ -3,15 +3,14 @@
 @section('contenido')
 <h2 style="color:black;" class="h2-custom">CREAR RESERVA</h2>
 <div class="container-formulario">
-
   <form action="/reservas" method="POST">
-      @csrf
-      <div class="form-group">
-        <label for="" class="form-label">Fecha (*)</label>
-        <input id="fecha" name="fecha" type="date" class="form-control" tabindex="1" required>
-        <div class="invalid-feedback">Ingrese una fecha valida</div>    
-      </div>
-      <div class="form-group">
+    @csrf
+    <div class="form-group">
+      <label for="" class="form-label">Fecha (*)</label>
+      <input id="fecha" name="fecha" type="date" class="form-control" tabindex="1" required>
+      <div class="invalid-feedback">Ingrese una fecha valida</div>    
+    </div>
+    <div class="form-group">
       <label for="" class="form-label">Hora (*)</label>
       <select class="form-control" id="hora" name="hora" type="time" required>
         <option>19:00</option>
@@ -37,7 +36,6 @@
       @else
       <a href="/" class="btn btn-secondary" tabindex="5">Cancelar</a>
       @endhasanyrole
-      
       <button type="submit" class="btn btn-primary" tabindex="4">Guardar</button>
     </div>
   </form>
@@ -48,7 +46,7 @@
         <input class="form-control width50" id="numero_reserva" name="numero_reserva" type="number" disabled>
         <span class="input-group-btn">
           <button href="#" class="btn btn-lg btn-secondary fw-bold border-black bg-white mr-1" style="color:black" disabled>Cambiar reserva</button>
-         </span>
+        </span>
       </div>
   </form>
 </div>

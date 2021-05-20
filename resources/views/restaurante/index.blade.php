@@ -14,15 +14,14 @@
   </thead>
   <tbody>    
     @foreach ($restaurantes as $restaurante)
-    <tr>
-        <td>{{$restaurante->id}}</td>
-        <td>{{$restaurante->nombre}}</td>
-        <td>{{$restaurante->ubicacion}}</td>
-        <td>{{$restaurante->capacidad}}</td>       
-    </tr>
-    @endforeach
-    <div>    
+      <tr>
+          <td>{{$restaurante->id}}</td>
+          <td>{{$restaurante->nombre}}</td>
+          <td>{{$restaurante->ubicacion}}</td>
+          <td>{{$restaurante->capacidad}}</td>       
+      </tr>
+    @endforeach    
   </tbody>       
 </table>
-</div>
+
 @endsection 

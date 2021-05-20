@@ -25,5 +25,17 @@ class ReservasSeeder extends Seeder
             'cantidad_personas' => 3,
             'observacion' => 'Una mesa afuera, por favor.'
         ]);
+        DB::table('reservas')->insert([
+            'fecha' => '2021-04-15',
+            'hora' => '21:00:00',
+            'cantidad_personas' => 10,
+            'observacion' => 'Una mesa adentro.'
+        ]);
+        DB::table('reservas')->insert([
+            'fecha' => '2021-04-15',
+            'hora' => '19:00:00',
+            'cantidad_personas' => 22,
+            'observacion' => 'Queremos varias mesas juntas.'
+        ]);
     }
 }

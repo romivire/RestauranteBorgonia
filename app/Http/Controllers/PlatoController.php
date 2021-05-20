@@ -16,12 +16,12 @@ class PlatoController extends Controller
     public function index()
     {
         $platos = Plato::all();
-
         $user = Auth::user();
+
         if(is_null($user))
             return view('plato.index')->with('platos',$platos);
         else
-        return view('plato.adminIndex')->with('platos',$platos);
+            return view('plato.adminIndex')->with('platos',$platos);
             
     }
 
@@ -55,6 +55,7 @@ class PlatoController extends Controller
            $imagen->move(public_path("img"),$nombre_imagen); 
            $cod=pg_escape_bytea($nombre_imagen);
            $platos->imagen=$cod;         
+        
         }
 
         $platos->save();
@@ -91,7 +92,7 @@ class PlatoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
-     */
+     */ 
     public function update(Request $request, $id)
     {
         $plato = Plato::find($id);
@@ -106,9 +107,10 @@ class PlatoController extends Controller
             $imagen->move(public_path("img"),$nombre_imagen); 
             $cod=pg_escape_bytea($nombre_imagen);
             $plato->imagen=$cod;         
+        
         }
 
-      $plato->save();
+        $plato->save();
 
         return redirect()->route('platos.index')->with('message','El plato ha sido modificado correctamente');
     }

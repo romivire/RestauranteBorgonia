@@ -41,13 +41,9 @@ Route::group(['middleware' => 'role:admin|editor'], function () {
 
 Route::get('/restaurantes','App\Http\Controllers\RestauranteController@index')->name('restaurantes.index');
 
-Route::group(['middleware' => 'role:admin|editor'], function () {
+Route::group(['middleware' => 'role:admin'], function () {
     Route::get('/restaurantes/{id}/edit','App\Http\Controllers\RestauranteController@edit')->name('restaurantes.edit');
     Route::patch('/restaurantes/{id}','App\Http\Controllers\RestauranteController@update')->name('restaurantes.update');
 });
-
-/* Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard'); */
 
 require __DIR__.'/auth.php';

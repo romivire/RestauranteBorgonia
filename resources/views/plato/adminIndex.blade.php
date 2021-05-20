@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('contenido')
-@if(session()->has('message'))
-    <div class="alert alert-success">
+    @if(session()->has('message'))
+      <div class="alert alert-success">
         <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-    {{ session()->get('message') }}
-    </div>
+        {{ session()->get('message') }}
+      </div>
     @endif
 <h2 style="color:black;" class="h2-custom">NUESTRA CARTA</h2>
 <a href="{{route('platos.create')}}" class="btn btn-info">CREAR NUEVO PLATO</a>
@@ -23,22 +23,23 @@
   </thead>
   <tbody>    
     @foreach ($platos as $plato)
-        <tr style="height: 100%;">
+      <tr style="height: 100%;">
         <td>{{$plato->id}}</td>
         <td>{{$plato->nombre}}</td>
         <td>{{$plato->categoria_plato}}</td>
         <td>{{$plato->precio}}</td>
         <td>{{$plato->vegetariano}}</td>
-        <td> @if ($imagen=$plato->imagen)
+        <td> 
+          @if ($imagen=$plato->imagen)
               <?php 
                 $bytea=stream_get_contents($imagen);
                 $string=pg_unescape_bytea($bytea);
               ?>
-
               <img src="img/{{$string}}" width="auto" height="100"></img>
-              @else
+          @else
               <img src="img/null.jpg" width="auto" height="100"></img>
-              @endif</td>
+          @endif
+        </td>
         <td>
          <form action="{{ route('platos.destroy',$plato->id) }}" method="POST">
             <a href="/platos/{{$plato->id}}/edit" class="btn btn-info">Editar</a>         

@@ -5,8 +5,8 @@
 <div class="container-formulario">
 
   <form method="POST" action="/platos/{{ $plato->id }}" enctype="multipart/form-data">
-      @csrf    
-      @method('PATCH')
+    @csrf    
+    @method('PATCH')
     <div class="form-group">
       <label for="" class="form-label">Nombre</label>
       <input id="nombre" name="nombre" type="text" class="form-control" value="{{$plato->nombre}}">    
@@ -43,7 +43,6 @@
       <a href="/platos" class="btn btn-secondary" tabindex="5">Cancelar</a>
       <button type="submit" class="btn btn-primary" tabindex="4">Guardar</button>
     </div>
-
   </form>
 </div>
 

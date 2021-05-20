@@ -35,12 +35,10 @@
       <label for="" class="form-label">Imagen</label>
       <input id="imagen" name="imagen" type="file" class="form-control-file" tabindex="6" style="color:black">
     </div>
-  
     <div class="form-group" style="padding:25px 50px 0px 50px">
       <a href="/platos" class="btn btn-secondary" tabindex="5">Cancelar</a>
       <button type="submit" class="btn btn-primary" tabindex="4">Guardar</button>
     </div>
-
   </form>
 </div>
 

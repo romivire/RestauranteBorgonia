@@ -24,11 +24,11 @@
                     
                 </main>
             </div>
-        <div class="push"></div>
+            <div class="push"></div>
         </div>
 
         <div class="footer width-full footer-edit">
-        <div style="padding:0.4em 0em 0em 0em">
+            <div style="padding:0.4em 0em 0em 0em">
                 <div class="row" style="width:100%">
                     <div class="col-lg-4 text-lg-left">
                         Copyright &copy; 2021
@@ -42,6 +42,4 @@
         
     @yield('script')
     </body>
-    
-    
 </html>

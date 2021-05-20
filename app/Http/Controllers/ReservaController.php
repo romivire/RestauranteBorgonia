@@ -39,7 +39,7 @@ class ReservaController extends Controller
      */
     public function store(Request $request)
     {   
-        $reservados=0;
+        $reservados=0; //variable para acumular suma de personas que hay reservadas para ese dia
         $fecha_solicitada=$request->get('fecha');
 
         $reservas= Reserva::where(function ($q) use ($fecha_solicitada) {
@@ -50,7 +50,7 @@ class ReservaController extends Controller
             $reservados+= $reservaObtenidas->cantidad_personas;
         }
         
-        $personas_reserva_actual=$request->get('cantidad_personas');
+        $personas_reserva_actual=$request->get('cantidad_personas'); //personas que pretende reservar la reserva en cuestion
         $capacidad = Restaurante::where('id','1')->first()->capacidad;
 
         if($reservados + $personas_reserva_actual > $capacidad){
@@ -102,10 +102,10 @@ class ReservaController extends Controller
     public function update(Request $request, $id)
     {
         $reserva = Reserva::find($id);
-        $reservados=0;
+        $reservados=0; //variable para acumular suma de personas que hay reservadas para ese dia
         $fecha_solicitada=$request->get('fecha');
 
-        $reservas= Reserva::where(function ($q) use ($fecha_solicitada) { // SEE HERE
+        $reservas= Reserva::where(function ($q) use ($fecha_solicitada) {
             $q->where('fecha', 'like', $fecha_solicitada);
     })->get();
 
@@ -113,7 +113,7 @@ class ReservaController extends Controller
             $reservados+= $reservaObtenidas->cantidad_personas;
         }
         
-        $personas_reserva_actual=$request->get('cantidad_personas');
+        $personas_reserva_actual=$request->get('cantidad_personas'); //personas que pretende reservar la reserva en cuestion
         $capacidad = Restaurante::where('id','1')->first()->capacidad;
 
         if($reservados + $personas_reserva_actual > $capacidad){
