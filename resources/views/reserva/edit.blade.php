@@ -6,7 +6,7 @@
 
   <form method="POST" action="/reservas/{{$reserva->id}}">
       @csrf    
-      @method('PATCH')
+    
     <div class="form-group">
       <label for="" class="form-label">Fecha (*)</label>
       <input id="fecha" name="fecha" type="date" class="form-control" tabindex="1" value="{{$reserva->fecha}}" required>    
