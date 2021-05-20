@@ -1,62 +1,58 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+Restaurante La Borgonia
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Link deploy heroku: 
 
-## About Laravel
+http://proyecto-heroku-iaw-romivire.herokuapp.com
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Descripción:
+La aplicacion desarrollada le permite a un restaurante administrar su menu y sus reservas, brindando un sistema para que los clientes puedan realizar sus reservas asi como tambien modificarlas mediante el identificador de la misma. Ademas, permite que el cliente pueda pre-visualizar el menu del lugar.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Una de las entidades son los platos, los cuales tienen un identificador, un nombre, una categoria (Carne,Pescado,Pasta,Postre,Ensalada), un precio, una indicacion de si se trata de un plato vegetariano y una imagen correspondiente. 
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Otra de las entidades son las reservas, las cuales tienen un identificador, una fecha, una hora (dentro de un rango preestablecido), una cantidad de personas y una opcional observacion.
 
-## Learning Laravel
+Por ultimo, la entidad restaurante es unica y posee un identificador, un nombre, una direccion y una capacidad de personas. 
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Los unicos usuarios registrados seran: 
+-El Administrador (con rol 'Admin') que puede hacer el ABM de reservas y de platos, pero ademas, puede modificar datos de los usuarios y del restaurante.
+-El Editor (con rol 'Editor') que puede realizar ABM de reservas y platos.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Los usuarios restantes seran clientes y pueden realizar consulta, alta y modificacion de reservas mediante su correspondiente ID, asi como tambien pueden visualizar el menu del restaurante
 
-## Laravel Sponsors
+Usuarios:
+    Admin:
+        user: admin@gmail.com
+        pwd: Admin1234
+    Editor:
+        user: editor@gmail.com
+        pwd: Editor1234
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Prueba de API
+La API le permite a los clientes (usuarios no logueados) ver la informacion referida a un ID de reserva y modificarla. Ademas, les permite visualizar todos los platos del lugar. El archivo Postman se encuentra en la carpeta 'postman'. Es una API sin restriccion de acceso.
 
-### Premium Partners
+Request 'GET Platos'
+Permite obtener todos los platos
+Ruta para obtener datos de los platos => http://proyecto-heroku-iaw-romivire.herokuapp.com/api/platos
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/)**
-- **[OP.GG](https://op.gg)**
+Request 'GET Reserva'
+Permite obtener una reserva a partir de un ID
+Ruta para obtener datos de la reserva (Ejemplo con ID=1) => http://proyecto-heroku-iaw-romivire.herokuapp.com/api/reservas/1
 
-## Contributing
+Request 'POST Reserva'
+Permite modificar los datos de una reserva a partir de un ID
+Ruta para enviar datos de la reserva (Ejemplo con ID=1) => http://proyecto-heroku-iaw-romivire.herokuapp.com/api/reservas/1
+Parámetros para hacer dicho request con el metodo POST: fecha - hora - cantidad personas - observacion
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Ejemplo
+"fecha" = 2020-02-27
+"hora" = 19:00:00
+"cantidad personas" = 6
+"observacion" = Esto es un simulacro
 
-## Code of Conduct
+Al ejecutar el request, en caso de que sea un request exitoso, retorna los datos de la reserva actualizada.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Librerias externas:
+Laravel Breeze
+Laravel Permission
+FontAwesome
 
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
