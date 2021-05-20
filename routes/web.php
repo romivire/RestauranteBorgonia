@@ -30,7 +30,7 @@ Route::group(['middleware' => 'role:admin|editor'], function () {
 });
 
 Route::get('/reservas/create','App\Http\Controllers\ReservaController@create')->name('reservas.create');
-Route::get('/reservas/{id}/edit','App\Http\Controllers\ReservaController@edit')->name('reservas.edit');
+Route::get('/reservas/{id}','App\Http\Controllers\ReservaController@edit')->name('reservas.edit');
 Route::delete('/reservas/{id}','App\Http\Controllers\ReservaController@destroy')->name('reservas.destroy');
 Route::post('/reservas/{id}','App\Http\Controllers\ReservaController@update')->name('reservas.update');
 Route::post('/reservas','App\Http\Controllers\ReservaController@store')->name('reservas.store');

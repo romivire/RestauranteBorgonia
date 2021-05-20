@@ -35,7 +35,7 @@
         <td style="width: 100px; overflow: hidden;">{{$reserva->observacion}}</td>
         <td>
          <form action="{{ route('reservas.destroy',$reserva->id) }}" method="POST">
-            <a href="/reservas/{{$reserva->id}}/edit" class="btn btn-info">Editar</a>         
+            <a href="/reservas/{{$reserva->id}}" class="btn btn-info">Editar</a>         
                 @csrf
                 @method('DELETE')
             <button type="submit" class="btn btn-danger">Delete</button>
