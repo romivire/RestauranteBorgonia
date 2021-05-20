@@ -34,11 +34,11 @@
                             
                             <li class="nav-item dropdown">
                                 <a class="nav-link" href="{{ route('restaurantes.index') }}" id="navbarDarkDropdownMenuLink" aria-expanded="false" role="button">Contacto</a>
-                                        @hasanyrole('editor|admin')
+                                        @role('admin')
                                             <div class="dropdown-content">
                                                 <a href="/restaurantes/1/edit">Editar datos</a>
                                             </div>
-                                        @endhasanyrole
+                                        @endrole
                             </li>
                             @if (Route::has('login'))
                                     @auth
@@ -46,11 +46,6 @@
                                             @csrf
                                             <li class="nav-item dropdown">
                                                 <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">Log Out</a>
-                                                @role('admin')
-                                                    <div class="dropdown-content">
-                                                        <a href="#">Editar usuarios</a>
-                                                    </div>
-                                                @endrole
                                             </li>
                                         </form>
                                     @else
