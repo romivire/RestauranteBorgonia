@@ -1,0 +1,103 @@
+{
+	"info": {
+		"_postman_id": "4538ce71-4dbf-4245-8132-1ffeaa45b13f",
+		"name": "Proyecto Servicio Web - Romina Vitacca",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Reserva",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "fecha",
+							"value": "2021-05-12",
+							"type": "text"
+						},
+						{
+							"key": "hora",
+							"value": "20:30:00",
+							"type": "text"
+						},
+						{
+							"key": "cantidad personas",
+							"value": "7",
+							"type": "text"
+						},
+						{
+							"key": "observacion",
+							"value": "es una prueba",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://proyecto-heroku-iaw-romivire.herokuapp.com/api/reservas/1",
+					"protocol": "https",
+					"host": [
+						"proyecto-heroku-iaw-romivire",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"reservas",
+						"1"
+					]
+				},
+				"description": "Permite modificar todos los datos de una reserva"
+			},
+			"response": []
+		},
+		{
+			"name": "Reserva",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://proyecto-heroku-iaw-romivire.herokuapp.com/api/reservas/1/edit",
+					"protocol": "http",
+					"host": [
+						"proyecto-heroku-iaw-romivire",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"reservas",
+						"1",
+						"edit"
+					]
+				},
+				"description": "Obtiene una reserva"
+			},
+			"response": []
+		},
+		{
+			"name": "Platos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://proyecto-heroku-iaw-romivire.herokuapp.com/api/platos",
+					"protocol": "http",
+					"host": [
+						"proyecto-heroku-iaw-romivire",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"platos"
+					]
+				},
+				"description": "Obtiene todos los platos"
+			},
+			"response": []
+		}
+	]
+}
