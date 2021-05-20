@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 @section('contenido')
+@if(session()->has('message'))
+    <div class="alert alert-success">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+    {{ session()->get('message') }}
+    </div>
+    @endif
 <h2 style="color:black;" class="h2-custom">RESERVAS</h2>
 <a href="{{ route('reservas.create') }}" class="btn btn-info">CREAR NUEVA RESERVA</a>
 
