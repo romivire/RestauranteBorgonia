@@ -27,10 +27,6 @@ Route::get('/platos', function () {
     return PlatoResource::collection(Plato::paginate(6));
 });
 
-Route::get('/platos/{id}', function ($id) {
-    return new PlatoResource(Plato::find($id));
-});
-
 Route::get('/reservas/{id}/edit', function ($id) {
     return new ReservaResource(Reserva::find($id));
 });
