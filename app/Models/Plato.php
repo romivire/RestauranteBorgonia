@@ -8,7 +8,6 @@ class Plato extends Model
 {
     protected $fillable = [
         'nombre',
-        'tipo_plato',
         'precio',
         'categoria_plato',
         'vegetariano',

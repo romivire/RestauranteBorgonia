@@ -15,28 +15,60 @@ class PlatosSeeder extends Seeder
     public function run()
     {
         DB::table('platos')->insert([
-            'nombre' => 'Ensalada rusa',
-            'tipo_plato' => 'ensalada',
+            'nombre' => 'Ensalada Cesar',
             'precio' => 3,
-            'categoria_plato' => 'entrada',
-            'vegetariano' => 1,
-            'imagen' => 'imagen a completar'
+            'categoria_plato' => 'Ensalada',
+            'vegetariano' => 'Si',
+            'imagen' => 'plato2.jpg'
+            
         ]);
         DB::table('platos')->insert([
-            'nombre' => 'Bife de lomo a la portuguesa',
-            'tipo_plato' => 'carne',
+            'nombre' => 'Goulash con Spaetzle',
             'precio' => 50,
-            'categoria_plato' => 'principal',
-            'vegetariano' => 0,
-            'imagen' => 'imagen a completar'
+            'categoria_plato' => 'Carne',
+            'vegetariano' => 'No',
+            'imagen' => 'plato5.jpg'
+            
         ]);
         DB::table('platos')->insert([
             'nombre' => 'Panqueques con dulce de leche',
-            'tipo_plato' => 'postre',
             'precio' => 50,
-            'categoria_plato' => 'postre',
-            'vegetariano' => 0,
-            'imagen' => 'imagen a completar'
+            'categoria_plato' => 'Postre',
+            'vegetariano' => 'Si',
+            'imagen' => 'plato6.jpg'
+            
+        ]);
+        DB::table('platos')->insert([
+            'nombre' => 'Milanesa napolitana',
+            'precio' => 70,
+            'categoria_plato' => 'Carne',
+            'vegetariano' => 'No',
+            'imagen' => 'plato4.jpg'
+            
+        ]);
+        DB::table('platos')->insert([
+            'nombre' => 'Cazuela de mariscos',
+            'precio' => 100,
+            'categoria_plato' => 'Pescado',
+            'vegetariano' => 'Si',
+            'imagen' => 'plato3.jpg'
+            
+        ]);
+        DB::table('platos')->insert([
+            'nombre' => 'Bruschettas',
+            'precio' => 65,
+            'categoria_plato' => 'Ensalada',
+            'vegetariano' => 'Si',
+            'imagen' => 'plato1.jpg'
+            
+        ]);
+        DB::table('platos')->insert([
+            'nombre' => 'Ravioles con salsa bolognesa',
+            'precio' => 50,
+            'categoria_plato' => 'Pasta',
+            'vegetariano' => 'No',
+            'imagen' => 'plato7.jpg'
+            
         ]);
     }
 }

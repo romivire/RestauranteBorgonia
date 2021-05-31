@@ -16,11 +16,10 @@ class CreatePlatoTable extends Migration
         Schema::create('platos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre',100);
-            $table->string('tipo_plato',100);
             $table->integer('precio');
             $table->string('categoria_plato',100);
-            $table->tinyInteger('vegetariano');
-            $table->longText('imagen');
+            $table->string('vegetariano',2);
+            $table->binary('imagen')->nullable();
             $table->timestamps();
         });
     }

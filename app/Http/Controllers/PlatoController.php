@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Plato;
+use Illuminate\Support\Facades\Auth;
 
 class PlatoController extends Controller
 {
@@ -15,7 +16,13 @@ class PlatoController extends Controller
     public function index()
     {
         $platos = Plato::all();
-        return view('plato.index')->with('platos',$platos);
+        $user = Auth::user();
+
+        if(is_null($user))
+            return view('plato.index')->with('platos',$platos);
+        else
+            return view('plato.adminIndex')->with('platos',$platos);
+            
     }
 
     /**
@@ -38,14 +45,22 @@ class PlatoController extends Controller
     {
         $platos = new Plato();
         $platos->nombre = $request->get('nombre');
-        $platos->tipo_plato = $request->get('tipo');
         $platos->categoria_plato = $request->get('categoria');
         $platos->precio = $request->get('precio');
         $platos->vegetariano = $request->get('vegetariano');
-        $platos->imagen = $request->get('imagen');
+
+        if($imagen=$request->file('imagen')){
+
+           $nombre_imagen=$imagen->getClientOriginalName();
+           $imagen->move(public_path("img"),$nombre_imagen); 
+           $cod=pg_escape_bytea($nombre_imagen);
+           $platos->imagen=$cod;         
+        
+        }
+
         $platos->save();
 
-        return redirect()->route('platos.index');
+        return redirect()->route('platos.index')->with('message','El plato ha sido registrado correctamente.');
     }
 
     /**
@@ -77,19 +92,27 @@ class PlatoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
-     */
+     */ 
     public function update(Request $request, $id)
     {
         $plato = Plato::find($id);
         $plato->nombre = $request->get('nombre');
-        $plato->tipo_plato = $request->get('tipo');
         $plato->categoria_plato = $request->get('categoria');
         $plato->precio = $request->get('precio');
         $plato->vegetariano = $request->get('vegetariano');
-        $plato->imagen = $request->get('imagen');
+        
+        if($imagen=$request->file('imagen')){
+            
+            $nombre_imagen=$imagen->getClientOriginalName();
+            $imagen->move(public_path("img"),$nombre_imagen); 
+            $cod=pg_escape_bytea($nombre_imagen);
+            $plato->imagen=$cod;         
+        
+        }
+
         $plato->save();
 
-        return redirect()->route('platos.index');
+        return redirect()->route('platos.index')->with('message','El plato ha sido modificado correctamente');
     }
 
     /**

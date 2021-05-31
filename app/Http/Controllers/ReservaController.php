@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Reserva;
+use App\Models\Restaurante;
 
 class ReservaController extends Controller
  
@@ -16,6 +17,7 @@ class ReservaController extends Controller
     public function index()
     {
         $reservas = Reserva::all();
+        
         return view('reserva.index')->with('reservas',$reservas);
     }
 
@@ -36,15 +38,35 @@ class ReservaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        $reserva = new Reserva();
-        $reserva->fecha = $request->get('fecha');
-        $reserva->hora = $request->get('hora');
-        $reserva->cantidad_personas = $request->get('cantidad_personas');
-        $reserva->observacion = $request->get('observacion');
-        $reserva->save();
+    {   
+        $reservados=0; //variable para acumular suma de personas que hay reservadas para ese dia
+        $fecha_solicitada=$request->get('fecha');
 
-        return redirect()->route('reservas.index');
+        $reservas= Reserva::where(function ($q) use ($fecha_solicitada) {
+            $q->where('fecha', 'like', $fecha_solicitada);
+        })->get();
+
+        foreach ($reservas as $reservaObtenidas){
+            $reservados+= $reservaObtenidas->cantidad_personas;
+        }
+        
+        $personas_reserva_actual=$request->get('cantidad_personas'); //personas que pretende reservar la reserva en cuestion
+        $capacidad = Restaurante::where('id','1')->first()->capacidad;
+
+        if($reservados + $personas_reserva_actual > $capacidad){
+            return redirect('')->with('message','La reserva no se ha podido registrar porque la totalidad del restaurante se encuentra reservada');
+        }
+        else{
+            $reserva = new Reserva();
+            $reserva->fecha = $fecha_solicitada;
+            $reserva->hora = $request->get('hora');
+            $reserva->cantidad_personas = $personas_reserva_actual;
+            $reserva->observacion = $request->get('observacion');
+            $reserva->save();
+            $data=$reserva->id;
+            return redirect('')->with('message','La reserva ha sido registrada correctamente. Su numero de reserva es: '.$data);
+        }
+
     }
 
     /**
@@ -80,13 +102,32 @@ class ReservaController extends Controller
     public function update(Request $request, $id)
     {
         $reserva = Reserva::find($id);
-        $reserva->fecha = $request->get('fecha');
-        $reserva->hora = $request->get('hora');
-        $reserva->cantidad_personas = $request->get('cantidad_personas');
-        $reserva->observacion = $request->get('observacion');
-        $reserva->save();
+        $reservados=0; //variable para acumular suma de personas que hay reservadas para ese dia
+        $fecha_solicitada=$request->get('fecha');
 
-        return redirect()->route('reservas.index');
+        $reservas= Reserva::where(function ($q) use ($fecha_solicitada) {
+            $q->where('fecha', 'like', $fecha_solicitada);
+    })->get();
+
+        foreach ($reservas as $reservaObtenidas){
+            $reservados+= $reservaObtenidas->cantidad_personas;
+        }
+        
+        $personas_reserva_actual=$request->get('cantidad_personas'); //personas que pretende reservar la reserva en cuestion
+        $capacidad = Restaurante::where('id','1')->first()->capacidad;
+
+        if($reservados + $personas_reserva_actual > $capacidad){
+            return redirect('')->with('message','La reserva no se ha podido registrar porque la totalidad del restaurante se encuentra reservada en la fecha indicada');
+        }
+        else{
+            $reserva->fecha = $fecha_solicitada;
+            $reserva->hora = $request->get('hora');
+            $reserva->cantidad_personas = $personas_reserva_actual;
+            $reserva->observacion = $request->get('observacion');
+            $reserva->save();
+            $data=$reserva->id;
+            return redirect('')->with('message','La reserva ha sido modificada correctamente. Su numero de reserva es: '.$data);
+        }
     }
 
     /**
