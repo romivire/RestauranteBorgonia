@@ -31,23 +31,9 @@
     </div>
     <small style="color:red;font-weight: bold;">(*) Campos Obligatorios</small>
     <div class="form-group" style="padding:25px 50px 0px 50px">
-      @hasanyrole('editor|admin')
         <a href="/reservas" class="btn btn-secondary" tabindex="5">Cancelar</a>  
-      @else
-      <a href="/" class="btn btn-secondary" tabindex="5">Cancelar</a>
-      @endhasanyrole
       <button type="submit" class="btn btn-primary" tabindex="4">Guardar</button>
     </div>
-  </form>
-  <form action="" method="POST" class="form-inline" style="padding:20px 20px">
-      @csrf  
-      <label for="" class="form-label" style="color:black; font-size:20px" >Si desea cambiar una reserva, ingrese el numero de la misma</label>
-      <div class="input-group">
-        <input class="form-control width50" id="numero_reserva" name="numero_reserva" type="number" disabled>
-        <span class="input-group-btn">
-          <button href="#" class="btn btn-lg btn-secondary fw-bold border-black bg-white mr-1" style="color:black" disabled>Cambiar reserva</button>
-        </span>
-      </div>
   </form>
 </div>
 

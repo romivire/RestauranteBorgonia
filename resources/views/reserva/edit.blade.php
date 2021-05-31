@@ -31,13 +31,16 @@
       <label for="" class="form-label">Observacion</label>
       <input id="observacion" name="observacion" type="text" class="form-control" size="75" tabindex="4" maxlength="150" value="{{$reserva->observacion}}">
     </div>
+    <div class="form-group">
+      <label for="" class="form-label">Estado(*)</label>
+      <select class="form-control" id="estado" name="estado" type="text" value="{{$reserva->estado}}" required>
+        <option value='Confirmada' <?php echo ($hora == 'Confirmada')?'selected':''; ?>>Confirmada</option>
+        <option value='Pendiente' <?php echo ($hora == 'Pendiente')?'selected':''; ?>>Pendiente</option>
+      </select>
+    </div>
     <small style="color:red;font-weight: bold;">(*) Campos Obligatorios</small>
     <div class="form-group" style="padding:25px 50px 0px 50px">
-      @hasanyrole('editor|admin')
         <a href="/reservas" class="btn btn-secondary" tabindex="5">Cancelar</a>  
-      @else
-        <a href="/" class="btn btn-secondary" tabindex="5">Cancelar</a>
-      @endhasanyrole
       <button type="submit" class="btn btn-primary" tabindex="4">Guardar</button>
     </div>
   </form>

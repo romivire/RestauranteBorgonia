@@ -58,10 +58,10 @@ class ReservaController extends Controller
         $capacidad = Restaurante::where('id','1')->first()->capacidad;
 
         if($dateTimestamp2 < $dateTimestamp1){
-            return redirect('')->with('error','La reserva no se ha podido registrar porque la fecha es anterior a la actual');
+            return redirect()->route('reservas.index')->with('error','La reserva no se ha podido registrar porque la fecha es anterior a la actual');
         }
         elseif($reservados + $personas_reserva_actual > $capacidad){
-            return redirect('')->with('error','La reserva no se ha podido registrar porque la totalidad del restaurante se encuentra reservada');
+            return redirect()->route('reservas.index')->with('error','La reserva no se ha podido registrar porque la totalidad del restaurante se encuentra reservada');
             }
             else{
                 $reserva = new Reserva();
@@ -69,9 +69,10 @@ class ReservaController extends Controller
                 $reserva->hora = $request->get('hora');
                 $reserva->cantidad_personas = $personas_reserva_actual;
                 $reserva->observacion = $request->get('observacion');
+                $reserva->estado='Confirmada';
                 $reserva->save();
                 $data=$reserva->id;
-                return redirect('')->with('message','La reserva ha sido registrada correctamente. Su numero de reserva es: '.$data);
+                return redirect()->route('reservas.index')->with('message','La reserva ha sido registrada correctamente. Su numero de reserva es: '.$data);
             }
 
     }
@@ -127,19 +128,20 @@ class ReservaController extends Controller
         $capacidad = Restaurante::where('id','1')->first()->capacidad;
 
         if($dateTimestamp2 < $dateTimestamp1){
-            return redirect('')->with('error','La reserva no se ha podido modificar porque la fecha es anterior a la actual');
+            return redirect()->route('reservas.index')->with('error','La reserva no se ha podido modificar porque la fecha es anterior a la actual');
         }
         elseif($reservados + $personas_reserva_actual > $capacidad){
-                return redirect('')->with('error','La reserva no se ha podido modificar porque la totalidad del restaurante se encuentra reservada en la fecha indicada');
+                return redirect()->route('reservas.index')->with('error','La reserva no se ha podido modificar porque la totalidad del restaurante se encuentra reservada en la fecha indicada');
             }
             else{
                 $reserva->fecha = $fecha_solicitada;
                 $reserva->hora = $request->get('hora');
                 $reserva->cantidad_personas = $personas_reserva_actual;
                 $reserva->observacion = $request->get('observacion');
+                $reserva->estado=$request->get('estado');
                 $reserva->save();
                 $data=$reserva->id;
-                return redirect('')->with('message','La reserva ha sido modificada correctamente. Su numero de reserva es: '.$data);
+                return redirect()->route('reservas.index')->with('message','La reserva ha sido modificada correctamente. Su numero de reserva es: '.$data);
             }
     }
 

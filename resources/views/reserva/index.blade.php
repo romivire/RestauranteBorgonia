@@ -12,6 +12,7 @@
       <th scope="col" style="width:10%">Hora</th>
       <th scope="col" style="width:15%">Cantidad de personas</th>
       <th scope="col">Observacion</th>
+      <th scope="col">Estado</th>
       <th scope="col" style="width:15%"></th>
     </tr>
   </thead>
@@ -27,6 +28,7 @@
         <td>{{$hora}}</td>
         <td>{{$reserva->cantidad_personas}}</td>
         <td style="width: 100px; overflow: hidden;">{{$reserva->observacion}}</td>
+        <td>{{$reserva->estado}}</td>
         <td>
          <form action="{{ route('reservas.destroy',$reserva->id) }}" method="POST">
             <a href="/reservas/{{$reserva->id}}" class="btn btn-info">Editar</a>         

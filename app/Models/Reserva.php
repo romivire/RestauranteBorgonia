@@ -11,6 +11,7 @@ class Reserva extends Model
         'hora',
         'cantidad_personas',
         'observacion',
+        'estado'
     ];
     protected $guarded = [
         'id',
