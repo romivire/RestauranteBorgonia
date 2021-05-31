@@ -1,12 +1,6 @@
 @extends('layouts.app')
 
 @section('contenido')
-    @if(session()->has('message'))
-      <div class="alert alert-success">
-        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-        {{ session()->get('message') }}
-      </div>
-    @endif
 <h2 style="color:black;" class="h2-custom">NUESTRA CARTA</h2>
 <a href="{{route('platos.create')}}" class="btn btn-info">CREAR NUEVO PLATO</a>
 <table class="table table-dark table-striped mt-4 cover-container" style="table-layout: fixed;">
@@ -31,14 +25,17 @@
         <td>{{$plato->vegetariano}}</td>
         <td> 
           @if ($imagen=$plato->imagen)
-              <?php 
-                $bytea=stream_get_contents($imagen);
-                $string=pg_unescape_bytea($bytea);
-              ?>
-              <img src="img/{{$string}}" width="auto" height="100"></img>
-          @else
-              <img src="img/null.jpg" width="auto" height="100"></img>
-          @endif
+                <?php 
+                   if($plato->imagen){
+                    $file=fopen(public_path("img/{$plato->id}.jpg"),"w");
+                    fwrite($file, base64_decode(stream_get_contents($plato->imagen)));
+                    $plato->image=$file; }
+                
+                ?>
+                <img src="img/{{$plato->id}}.jpg" width="auto" height="100"></img>
+              @else
+                <img src="img/null.jpg" width="auto" height="100"></img>
+              @endif
         </td>
         <td>
          <form action="{{ route('platos.destroy',$plato->id) }}" method="POST">

@@ -16,11 +16,6 @@ class PlatoController extends Controller
     public function index()
     {
         $platos = Plato::all();
-        $user = Auth::user();
-
-        if(is_null($user))
-            return view('plato.index')->with('platos',$platos);
-        else
             return view('plato.adminIndex')->with('platos',$platos);
             
     }
@@ -32,7 +27,7 @@ class PlatoController extends Controller
      */
     public function create()
     {
-        return view('plato.create');
+            return view('plato.create');
     }
 
     /**
@@ -50,17 +45,19 @@ class PlatoController extends Controller
         $platos->vegetariano = $request->get('vegetariano');
 
         if($imagen=$request->file('imagen')){
-
-           $nombre_imagen=$imagen->getClientOriginalName();
-           $imagen->move(public_path("img"),$nombre_imagen); 
-           $cod=pg_escape_bytea($nombre_imagen);
-           $platos->imagen=$cod;         
-        
+                $imagelink=file_get_contents($request->file('imagen'));
+                $encode_image= base64_encode($imagelink);
+                $platos->imagen=$encode_image;      
+        }
+        else{
+            $imagelink=file_get_contents('img/null.jpg',true);
+            $encode_image= base64_encode($imagelink);
+            $platos->imagen=$encode_image;   
         }
 
         $platos->save();
 
-        return redirect()->route('platos.index')->with('message','El plato ha sido registrado correctamente.');
+        return redirect()->route('platos.adminIndex')->with('message','El plato ha sido registrado correctamente.');
     }
 
     /**
@@ -102,17 +99,19 @@ class PlatoController extends Controller
         $plato->vegetariano = $request->get('vegetariano');
         
         if($imagen=$request->file('imagen')){
-            
-            $nombre_imagen=$imagen->getClientOriginalName();
-            $imagen->move(public_path("img"),$nombre_imagen); 
-            $cod=pg_escape_bytea($nombre_imagen);
-            $plato->imagen=$cod;         
-        
+            $imagelink=file_get_contents($request->file('imagen'));
+            $encode_image= base64_encode($imagelink);
+            $plato->imagen=$encode_image;      
+        }
+        else{
+            $imagelink=file_get_contents('img/null.jpg',true);
+            $encode_image= base64_encode($imagelink);
+            $platos->imagen=$encode_image;   
         }
 
         $plato->save();
 
-        return redirect()->route('platos.index')->with('message','El plato ha sido modificado correctamente');
+        return redirect()->route('platos.adminIndex')->with('message','El plato ha sido modificado correctamente');
     }
 
     /**
@@ -126,6 +125,6 @@ class PlatoController extends Controller
         $plato = Plato::find($id);        
         $plato->delete();
 
-        return redirect()->route('platos.index');
+        return redirect()->route('platos.adminIndex')->with('message','El plato ha sido borrado correctamente');
     }
 }
