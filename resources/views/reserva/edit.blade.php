@@ -3,7 +3,7 @@
 @section('contenido')
 <h2 style="color:black;" class="h2-custom">EDITAR RESERVA</h2>
 <div class="container-formulario">
-  <form method="POST" action="/reservas/{{$reserva->id}}">
+  <form method="POST" action="/reservas/{{$reserva->id}}" enctype="multipart/form-data">
     @csrf    
     <div class="form-group">
       <label for="" class="form-label">Fecha (*)</label>
