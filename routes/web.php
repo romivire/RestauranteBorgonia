@@ -17,16 +17,13 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-
-Route::get('/platos','App\Http\Controllers\PlatoController@index')->name('platos.index');
-
 Route::group(['middleware' => 'role:admin|editor'], function () {
     Route::get('/platos/create','App\Http\Controllers\PlatoController@create')->name('platos.create');
     Route::get('/platos/{id}/edit','App\Http\Controllers\PlatoController@edit')->name('platos.edit');
     Route::patch('/platos/{id}','App\Http\Controllers\PlatoController@update')->name('platos.update');
     Route::post('/platos','App\Http\Controllers\PlatoController@store')->name('platos.store');
     Route::delete('/platos/{id}','App\Http\Controllers\PlatoController@destroy')->name('platos.destroy');
-    Route::get('/platosAdmin','App\Http\Controllers\PlatoController@index')->name('platos.adminIndex');
+    Route::get('/platos','App\Http\Controllers\PlatoController@index')->name('platos.adminIndex');
 });
 
 Route::get('/reservas/create','App\Http\Controllers\ReservaController@create')->name('reservas.create');

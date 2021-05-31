@@ -18,7 +18,7 @@
                     <a class="nav-link" href="{{ url('/') }}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('platos.index') }}">Nuestra carta</a>
+                    <a class="nav-link" href="{{ route('platos.adminIndex') }}">Nuestra carta</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link" href="{{ route('reservas.index') }}">Reservas</a>             
