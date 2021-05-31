@@ -13,6 +13,7 @@
             </ul>
                             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ms-auto">
+                @hasanyrole('editor|admin')
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('/') }}">Home</a>
                 </li>
@@ -20,11 +21,7 @@
                     <a class="nav-link" href="{{ route('platos.index') }}">Nuestra carta</a>
                 </li>
                 <li class="nav-item dropdown">
-                    @hasanyrole('editor|admin')
-                        <a class="nav-link" href="{{ route('reservas.index') }}">Reservas</a>
-                    @else
-                        <a class="nav-link" href="{{ route('reservas.create') }}">Reservas</a>
-                    @endhasanyrole              
+                    <a class="nav-link" href="{{ route('reservas.index') }}">Reservas</a>             
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link" href="{{ route('restaurantes.index') }}" id="navbarDarkDropdownMenuLink" aria-expanded="false" role="button">Contacto</a>
@@ -34,6 +31,7 @@
                         </div>
                     @endrole
                 </li>
+                @endhasanyrole
                 @if (Route::has('login'))
                     @auth
                     <form method="POST" action="{{ route('logout') }}">

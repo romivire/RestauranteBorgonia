@@ -9,7 +9,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="{{ asset('css/fontawesome-free-5.15.3-web/css-iconos/all.css') }}" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
-       
+
         <link href="{{ asset('css/cover.css') }}" rel="stylesheet">
         @yield('cusstom-css')
     </head>
@@ -20,6 +20,18 @@
 
                 <!-- Page Content -->
                 <main class="px-3" style="width: 100%; text-align: center;">
+                @if(session()->has('error'))
+                    <div class="alert alert-danger">
+                        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                        {{ session()->get('error') }}
+                    </div>
+                @endif
+                @if(session()->has('message'))
+                    <div class="alert alert-success">
+                        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                        {{ session()->get('message') }}
+                    </div>
+                @endif
                     @yield('contenido')
                     
                 </main>
