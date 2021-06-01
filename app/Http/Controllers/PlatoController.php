@@ -52,7 +52,7 @@ class PlatoController extends Controller
         else{
             $imagelink=file_get_contents("img/null.jpg",true);
             $encode_image= base64_encode($imagelink);
-            $plato->imagen=$encode_image;   
+            $platos->imagen=$encode_image;   
         }
 
         $platos->save();
