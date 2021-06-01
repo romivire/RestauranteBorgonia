@@ -26,10 +26,10 @@
         <td> 
           @if ($imagen=$plato->imagen)
                 <?php 
-                   if($plato->imagen){
+                  if($plato->imagen){
                     $file=fopen(public_path("img/{$plato->id}.jpg"),"w");
                     fwrite($file, base64_decode(stream_get_contents($plato->imagen)));
-                    $plato->image=$file; }
+                  }
                 
                 ?>
                 <img src="img/{{$plato->id}}.jpg" width="auto" height="100"></img>

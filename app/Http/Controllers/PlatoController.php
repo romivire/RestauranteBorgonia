@@ -44,15 +44,15 @@ class PlatoController extends Controller
         $platos->precio = $request->get('precio');
         $platos->vegetariano = $request->get('vegetariano');
 
-        if($imagen=$request->file('imagen')){
+        if($request->file('imagen')){
                 $imagelink=file_get_contents($request->file('imagen'));
                 $encode_image= base64_encode($imagelink);
                 $platos->imagen=$encode_image;      
         }
         else{
-            $imagelink=file_get_contents('img/null.jpg',true);
+            $imagelink=file_get_contents("img/null.jpg",true);
             $encode_image= base64_encode($imagelink);
-            $platos->imagen=$encode_image;   
+            $plato->imagen=$encode_image;   
         }
 
         $platos->save();
@@ -98,15 +98,15 @@ class PlatoController extends Controller
         $plato->precio = $request->get('precio');
         $plato->vegetariano = $request->get('vegetariano');
         
-        if($imagen=$request->file('imagen')){
+        if($request->file('imagen')){
             $imagelink=file_get_contents($request->file('imagen'));
             $encode_image= base64_encode($imagelink);
             $plato->imagen=$encode_image;      
         }
         else{
-            $imagelink=file_get_contents('img/null.jpg',true);
+            $imagelink=file_get_contents("img/null.jpg",true);
             $encode_image= base64_encode($imagelink);
-            $platos->imagen=$encode_image;   
+            $plato->imagen=$encode_image;   
         }
 
         $plato->save();
