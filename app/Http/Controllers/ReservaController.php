@@ -51,7 +51,9 @@ class ReservaController extends Controller
         })->get();
 
         foreach ($reservas as $reservaObtenidas){
-            $reservados+= $reservaObtenidas->cantidad_personas;
+            if($reservaObtenidas->estado=='Confirmada'){ //no suma las personas de reservas en estado 'Pendiente'
+                $reservados+= $reservaObtenidas->cantidad_personas;
+            }
         }
         
         $personas_reserva_actual=$request->get('cantidad_personas'); //personas que pretende reservar la reserva en cuestion
@@ -121,12 +123,17 @@ class ReservaController extends Controller
     })->get();
 
         foreach ($reservas as $reservaObtenidas){
-            $reservados+= $reservaObtenidas->cantidad_personas;
+            if($reservaObtenidas->estado=='Confirmada'){ //no suma las personas de reservas en estado 'Pendiente'
+                $reservados+= $reservaObtenidas->cantidad_personas;
+            }
         }
         
         $personas_reserva_actual=$request->get('cantidad_personas'); //personas que pretende reservar la reserva en cuestion
         $capacidad = Restaurante::where('id','1')->first()->capacidad;
-
+        if($reserva->estado=='Confirmada'){
+            $reservados=$reservados-$reserva->cantidad_personas; //descuento las personas de la reserva actual, porque ya estaba cargada en la BD.
+        }
+        
         if($dateTimestamp2 < $dateTimestamp1){
             return redirect()->route('reservas.index')->with('error','La reserva no se ha podido modificar porque la fecha es anterior a la actual');
         }
