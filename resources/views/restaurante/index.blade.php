@@ -2,8 +2,10 @@
 
 @section('contenido')
 <h2 style="color:black;" class="h2-custom">DATOS DEL RESTAURANTE</h2>
-
-<table class="table table-dark table-striped mt-4 cover-container">
+@hasanyrole('admin')
+<a href="/restaurantes/1/edit" class="btn btn-info">MODIFICAR DATOS</a>
+@endhasanyrole
+<table class="table table-dark table-hover mt-4">
   <thead>
     <tr>
       <th scope="col">ID</th>

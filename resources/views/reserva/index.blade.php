@@ -4,16 +4,16 @@
 <h2 style="color:black;" class="h2-custom">RESERVAS</h2>
 <a href="{{ route('reservas.create') }}" class="btn btn-info">CREAR NUEVA RESERVA</a>
 
-<table class="table table-dark table-striped mt-4 cover-container" style="table-layout: fixed;">
+<table class="table table-dark table-hover mt-4">
   <thead>
     <tr>
-      <th scope="col" style="width:10%">ID</th>
-      <th scope="col" style="width:10%">Fecha</th>
-      <th scope="col" style="width:10%">Hora</th>
-      <th scope="col" style="width:15%">Cantidad de personas</th>
+      <th scope="col" >ID</th>
+      <th scope="col" >Fecha</th>
+      <th scope="col" >Hora</th>
+      <th scope="col" >Cantidad de personas</th>
       <th scope="col">Observacion</th>
       <th scope="col">Estado</th>
-      <th scope="col" style="width:15%"></th>
+      <th scope="col" ></th>
     </tr>
   </thead>
   <tbody>    
