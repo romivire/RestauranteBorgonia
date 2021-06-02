@@ -28,9 +28,9 @@
     </div>
     <div class="form-group">
       <label for="" class="form-label">Es vegetariano</label>
-      <select class="form-control" id="vegetariano" name="vegetariano" type=text value="{{$plato->vegetariano}}" required>
-        <option>Si</option>
-        <option>No</option>
+      <select class="form-control" id="vegetariano" name="vegetariano" type=text value="{{$plato->vegetariano}}">
+        <option value='Si' <?php echo ($plato->vegetariano == 'Si')?'selected':''; ?>>Si</option>
+        <option value='No' <?php echo ($plato->vegetariano == 'No')?'selected':''; ?>>No</option>
       </select>
     </div>
     
