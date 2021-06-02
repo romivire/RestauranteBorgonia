@@ -24,18 +24,15 @@
         <td>{{$plato->precio}}</td>
         <td>{{$plato->vegetariano}}</td>
         <td> 
-          @if ($imagen=$plato->imagen)
+          @if ($plato->imagen)
                 <?php 
-                  if($plato->imagen){
                     $file=fopen(public_path("img/{$plato->id}.jpg"),"w");
                     fwrite($file, base64_decode(stream_get_contents($plato->imagen)));
-                  }
-                
                 ?>
                 <img src="img/{{$plato->id}}.jpg" width="auto" height="100"></img>
-              @else
+          @else
                 <img src="img/null.jpg" width="auto" height="100"></img>
-              @endif
+          @endif
         </td>
         <td>
          <form action="{{ route('platos.destroy',$plato->id) }}" method="POST">
