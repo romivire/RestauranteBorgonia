@@ -3,16 +3,16 @@
 @section('contenido')
 <h2 style="color:black;" class="h2-custom">NUESTRA CARTA</h2>
 <a href="{{route('platos.create')}}" class="btn btn-info">CREAR NUEVO PLATO</a>
-<table class="table table-dark table-striped mt-4 cover-container" style="table-layout: fixed;">
+<table class="table table-dark table-hover mt-4">
   <thead>
     <tr>
-      <th scope="col" style="width:10%">ID</th>
-      <th scope="col" style="width:20%">Nombre</th>
-      <th scope="col" style="width:10%">Categoria</th>
-      <th scope="col" style="width:10%">Precio</th>
-      <th scope="col" style="width:10%">Vegetariano</th>
-      <th scope="col" style="width:20%">Imagen</th>
-      <th scope="col" style="width:15%"></th>
+      <th scope="col">ID</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Categoria</th>
+      <th scope="col">Precio</th>
+      <th scope="col">Vegetariano</th>
+      <th scope="col">Imagen</th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>    

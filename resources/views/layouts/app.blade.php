@@ -19,7 +19,7 @@
                 @include('layouts.navigation')
 
                 <!-- Page Content -->
-                <main class="bd-content" style="width: 100%; text-align: center;">
+                <main style="width: 100%; text-align: center;">
                 @if(session()->has('error'))
                     <div class="alert alert-danger">
                         <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
