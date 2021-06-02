@@ -112,44 +112,56 @@ class ReservaController extends Controller
     public function update(Request $request, $id)
     {
         $reserva = Reserva::find($id);
-        $reservados=0; //variable para acumular suma de personas que hay reservadas para ese dia
-        $fecha_solicitada=$request->get('fecha');
-        $fechaActual = date('y-m-d');
-        $dateTimestamp1 = strtotime($fechaActual);
-        $dateTimestamp2 = strtotime($fecha_solicitada);
-        
-        $reservas= Reserva::where(function ($q) use ($fecha_solicitada) {
-            $q->where('fecha', 'like', $fecha_solicitada);
-    })->get();
+        if($request->get('estado')=='Pendiente'){
+            $reserva->fecha = $request->get('fecha');
+            $reserva->hora = $request->get('hora');
+            $reserva->cantidad_personas = $request->get('cantidad_personas');
+            $reserva->observacion = $request->get('observacion');
+            $reserva->estado=$request->get('estado');
+            $reserva->save();
+            $data=$reserva->id;
+            return redirect()->route('reservas.index')->with('message','La reserva ha sido modificada correctamente. Su numero de reserva es: '.$data);
+        }
+        else{
+            $reservados=0; //variable para acumular suma de personas que hay reservadas para ese dia
+            $fecha_solicitada=$request->get('fecha');
+            $fechaActual = date('y-m-d');
+            $dateTimestamp1 = strtotime($fechaActual);
+            $dateTimestamp2 = strtotime($fecha_solicitada);
+            
+            $reservas= Reserva::where(function ($q) use ($fecha_solicitada) {
+                $q->where('fecha', 'like', $fecha_solicitada);
+            })->get();
 
-        foreach ($reservas as $reservaObtenidas){
-            if($reservaObtenidas->estado=='Confirmada'){ //no suma las personas de reservas en estado 'Pendiente'
-                $reservados+= $reservaObtenidas->cantidad_personas;
+            foreach ($reservas as $reservaObtenidas){
+                if($reservaObtenidas->estado=='Confirmada'){ //no suma las personas de reservas en estado 'Pendiente'
+                    $reservados+= $reservaObtenidas->cantidad_personas;
+                }
             }
-        }
-        
-        $personas_reserva_actual=$request->get('cantidad_personas'); //personas que pretende reservar la reserva en cuestion
-        $capacidad = Restaurante::where('id','1')->first()->capacidad;
-        if($reserva->estado=='Confirmada'){
-            $reservados=$reservados-$reserva->cantidad_personas; //descuento las personas de la reserva actual, porque ya estaba cargada en la BD.
-        }
-        
-        if($dateTimestamp2 < $dateTimestamp1){
-            return redirect()->route('reservas.index')->with('error','La reserva no se ha podido modificar porque la fecha es anterior a la actual');
-        }
-        elseif($reservados + $personas_reserva_actual > $capacidad){
-                return redirect()->route('reservas.index')->with('error','La reserva no se ha podido modificar porque la totalidad del restaurante se encuentra reservada en la fecha indicada');
+            
+            $personas_reserva_actual=$request->get('cantidad_personas'); //personas que pretende reservar la reserva en cuestion
+            $capacidad = Restaurante::where('id','1')->first()->capacidad;
+            if($reserva->estado=='Confirmada'){
+                $reservados=$reservados-$reserva->cantidad_personas; //descuento las personas de la reserva actual, porque ya estaba cargada en la BD.
             }
-            else{
-                $reserva->fecha = $fecha_solicitada;
-                $reserva->hora = $request->get('hora');
-                $reserva->cantidad_personas = $personas_reserva_actual;
-                $reserva->observacion = $request->get('observacion');
-                $reserva->estado=$request->get('estado');
-                $reserva->save();
-                $data=$reserva->id;
-                return redirect()->route('reservas.index')->with('message','La reserva ha sido modificada correctamente. Su numero de reserva es: '.$data);
+            
+            if($dateTimestamp2 < $dateTimestamp1){
+                return redirect()->route('reservas.index')->with('error','La reserva no se ha podido modificar porque la fecha es anterior a la actual');
             }
+            elseif($reservados + $personas_reserva_actual > $capacidad){
+                    return redirect()->route('reservas.index')->with('error','La reserva no se ha podido modificar porque la totalidad del restaurante se encuentra reservada en la fecha indicada');
+                }
+                else{
+                    $reserva->fecha = $fecha_solicitada;
+                    $reserva->hora = $request->get('hora');
+                    $reserva->cantidad_personas = $personas_reserva_actual;
+                    $reserva->observacion = $request->get('observacion');
+                    $reserva->estado=$request->get('estado');
+                    $reserva->save();
+                    $data=$reserva->id;
+                    return redirect()->route('reservas.index')->with('message','La reserva ha sido modificada correctamente. Su numero de reserva es: '.$data);
+                }
+        }
     }
 
     /**
