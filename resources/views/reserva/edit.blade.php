@@ -29,7 +29,7 @@
     </div>
     <div class="form-group">
       <label for="" class="form-label">Observacion</label>
-      <input id="observacion" name="observacion" type="text" class="form-control" size="50" tabindex="4" maxlength="150" value="{{$reserva->observacion}}">
+      <input id="observacion" name="observacion" type="text" class="form-control" size="42" tabindex="4" maxlength="150" value="{{$reserva->observacion}}">
     </div>
     <div class="form-group">
       <label for="" class="form-label">Estado(*)</label>

@@ -27,7 +27,7 @@
     </div>  
     <div class="form-group">
       <label for="" class="form-label">Observacion</label>
-      <input id="observacion" name="observacion" type="text" class="form-control" size="50" tabindex="4" maxlength="150">
+      <input id="observacion" name="observacion" type="text" class="form-control" size="42" tabindex="4" maxlength="150">
     </div>
     <small style="color:red;font-weight: bold;">(*) Campos Obligatorios</small>
     <div class="form-group" style="padding:25px 50px 0px 50px">
