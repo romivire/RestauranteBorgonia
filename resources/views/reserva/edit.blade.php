@@ -34,8 +34,8 @@
     <div class="form-group">
       <label for="" class="form-label">Estado(*)</label>
       <select class="form-control" id="estado" name="estado" type="text" value="{{$reserva->estado}}" required>
-        <option value='Confirmada' <?php echo ($hora == 'Confirmada')?'selected':''; ?>>Confirmada</option>
-        <option value='Pendiente' <?php echo ($hora == 'Pendiente')?'selected':''; ?>>Pendiente</option>
+        <option value='Confirmada' <?php echo ($reserva->estado == 'Confirmada')?'selected':''; ?>>Confirmada</option>
+        <option value='Pendiente' <?php echo ($reserva->estado == 'Pendiente')?'selected':''; ?>>Pendiente</option>
       </select>
     </div>
     <small style="color:red;font-weight: bold;">(*) Campos Obligatorios</small>
