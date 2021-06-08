@@ -3,7 +3,7 @@
 @section('contenido')
 <h2 style="color:black;" class="h2-custom">EDITAR RESERVA</h2>
 <div class="container-formulario">
-  <form method="POST" action="/reservas/{{$reserva->id}}">
+  <form method="POST" action="/reservas/{{$reserva->id}}" enctype="multipart/form-data">
     @csrf    
     <div class="form-group">
       <label for="" class="form-label">Fecha (*)</label>
@@ -29,15 +29,18 @@
     </div>
     <div class="form-group">
       <label for="" class="form-label">Observacion</label>
-      <input id="observacion" name="observacion" type="text" class="form-control" size="75" tabindex="4" maxlength="150" value="{{$reserva->observacion}}">
+      <input id="observacion" name="observacion" type="text" class="form-control" size="47" tabindex="4" maxlength="150" value="{{$reserva->observacion}}">
+    </div>
+    <div class="form-group">
+      <label for="" class="form-label">Estado(*)</label>
+      <select class="form-control" id="estado" name="estado" type="text" value="{{$reserva->estado}}" required>
+        <option value='Confirmada' <?php echo ($reserva->estado == 'Confirmada')?'selected':''; ?>>Confirmada</option>
+        <option value='Pendiente' <?php echo ($reserva->estado == 'Pendiente')?'selected':''; ?>>Pendiente</option>
+      </select>
     </div>
     <small style="color:red;font-weight: bold;">(*) Campos Obligatorios</small>
     <div class="form-group" style="padding:25px 50px 0px 50px">
-      @hasanyrole('editor|admin')
         <a href="/reservas" class="btn btn-secondary" tabindex="5">Cancelar</a>  
-      @else
-        <a href="/" class="btn btn-secondary" tabindex="5">Cancelar</a>
-      @endhasanyrole
       <button type="submit" class="btn btn-primary" tabindex="4">Guardar</button>
     </div>
   </form>

@@ -15,27 +15,31 @@ class ReservasSeeder extends Seeder
     public function run()
     {
         DB::table('reservas')->insert([
-            'fecha' => '2021-04-10',
+            'fecha' => '2021-07-10',
             'hora' => '19:00:00',
-            'cantidad_personas' => 3
+            'cantidad_personas' => 6,
+            'estado' => 'Confirmada'
         ]);
         DB::table('reservas')->insert([
-            'fecha' => '2021-04-10',
+            'fecha' => '2021-07-10',
             'hora' => '21:00:00',
             'cantidad_personas' => 3,
-            'observacion' => 'Una mesa afuera, por favor.'
+            'observacion' => 'Una mesa afuera, por favor.',
+            'estado' => 'Confirmada'
         ]);
         DB::table('reservas')->insert([
-            'fecha' => '2021-04-15',
+            'fecha' => '2021-07-15',
             'hora' => '21:00:00',
             'cantidad_personas' => 10,
-            'observacion' => 'Una mesa adentro.'
+            'observacion' => 'Una mesa adentro.',
+            'estado' => 'Confirmada'
         ]);
         DB::table('reservas')->insert([
-            'fecha' => '2021-04-15',
+            'fecha' => '2021-07-15',
             'hora' => '19:00:00',
             'cantidad_personas' => 22,
-            'observacion' => 'Queremos varias mesas juntas.'
+            'observacion' => 'Queremos varias mesas juntas.',
+            'estado' => 'Confirmada'
         ]);
     }
 }

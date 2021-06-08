@@ -19,13 +19,33 @@
 }
  
 /* For popups alerts*/
-.alert {
-  padding: 20px;
-  background-color: #77b446;
-  color: rgb(8, 1, 1);
-  font-size: 20px;
+
+.alert-danger {
+  background-color: #f2dede;
+  border-color: #ebccd1;
+  color: #a94442;
 }
 
+.alert-danger hr {
+  border-top-color: #e4b9c0;
+}
+
+.alert-danger .alert-link {
+  color: #843534;
+}
+.alert-success {
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+  color: #3c763d;
+}
+
+.alert-success hr {
+  border-top-color: #c9e2b3;
+}
+
+.alert-success .alert-link {
+  color: #2b542c;
+}
 
 .closebtn {
   margin-left: 15px;
@@ -42,8 +62,6 @@
   color: black;
 }
 
-
-
 /*
  * Base structure
  */
@@ -56,6 +74,7 @@ body {
   background-size: cover;
   background-color: rgb(86, 79, 79);
   height: 100%;
+  min-width: max-content;
   margin:0;
   
 }

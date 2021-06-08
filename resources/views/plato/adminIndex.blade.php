@@ -1,24 +1,18 @@
 @extends('layouts.app')
 
 @section('contenido')
-    @if(session()->has('message'))
-      <div class="alert alert-success">
-        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-        {{ session()->get('message') }}
-      </div>
-    @endif
 <h2 style="color:black;" class="h2-custom">NUESTRA CARTA</h2>
 <a href="{{route('platos.create')}}" class="btn btn-info">CREAR NUEVO PLATO</a>
-<table class="table table-dark table-striped mt-4 cover-container" style="table-layout: fixed;">
+<table class="table table-dark table-hover mt-4">
   <thead>
     <tr>
-      <th scope="col" style="width:10%">ID</th>
-      <th scope="col" style="width:20%">Nombre</th>
-      <th scope="col" style="width:10%">Categoria</th>
-      <th scope="col" style="width:10%">Precio</th>
-      <th scope="col" style="width:10%">Vegetariano</th>
-      <th scope="col" style="width:20%">Imagen</th>
-      <th scope="col" style="width:15%"></th>
+      <th scope="col">ID</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Categoria</th>
+      <th scope="col">Precio</th>
+      <th scope="col">Vegetariano</th>
+      <th scope="col">Imagen</th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>    
@@ -30,14 +24,14 @@
         <td>{{$plato->precio}}</td>
         <td>{{$plato->vegetariano}}</td>
         <td> 
-          @if ($imagen=$plato->imagen)
-              <?php 
-                $bytea=stream_get_contents($imagen);
-                $string=pg_unescape_bytea($bytea);
-              ?>
-              <img src="img/{{$string}}" width="auto" height="100"></img>
+          @if ($plato->imagen)
+                <?php 
+                    $file=fopen(public_path("img/{$plato->id}.jpg"),"w");
+                    fwrite($file, base64_decode(stream_get_contents($plato->imagen)));
+                ?>
+                <img src="img/{{$plato->id}}.jpg" width="auto" height="100"></img>
           @else
-              <img src="img/null.jpg" width="auto" height="100"></img>
+                <img src="img/null.jpg" width="auto" height="100"></img>
           @endif
         </td>
         <td>
