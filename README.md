@@ -26,30 +26,6 @@ Editor:
   * user: editor@gmail.com
   * pwd: Editor1234
 
-### Prueba de API
-La API le permite a los clientes (usuarios no logueados) ver la informacion referida a un ID de reserva y modificarla. Ademas, les permite visualizar todos los platos del lugar. El archivo Postman se encuentra en la carpeta 'postman'. Es una API sin restriccion de acceso.
-
-#### Request 'GET Platos'
-Permite obtener todos los platos
-Ruta para obtener datos de los platos => http://proyecto-heroku-iaw-romivire.herokuapp.com/api/platos
-
-#### Request 'GET Reserva'
-Permite obtener una reserva a partir de un ID
-Ruta para obtener datos de la reserva (Ejemplo con ID=1) => http://proyecto-heroku-iaw-romivire.herokuapp.com/api/reservas/1
-
-#### Request 'POST Reserva'
-Permite modificar los datos de una reserva a partir de un ID
-Ruta para enviar datos de la reserva (Ejemplo con ID=1) => http://proyecto-heroku-iaw-romivire.herokuapp.com/api/reservas/1
-Parámetros para hacer dicho request con el metodo POST: fecha - hora - cantidad personas - observacion
-
-Ejemplo
-* "fecha" = 2020-02-27
-* "hora" = 19:00:00
-* "cantidad personas" = 6
-* "observacion" = Esto es un simulacro
-
-Al ejecutar el request, en caso de que sea un request exitoso, retorna los datos de la reserva actualizada.
-
 ### Librerias externas:
 * Laravel Breeze
 * Laravel Permission
